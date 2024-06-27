@@ -52,6 +52,7 @@ exchange_rate_app/
 │
 ├── utils/
 │   └── exchange_rate_analyzer.py  # ExchangeRateAnalyzer class definition
+|   └── decorators.py  # decorators definition
 │
 └── requirements.txt  # Required Python libraries
 ```
