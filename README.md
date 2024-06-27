@@ -2,7 +2,7 @@
 ### Production App
   #### Access the application from link : https://bupacodeexercise-wzm2dlq6nuaxeunj98sxze.streamlit.app/
   
-  [![](https://markdown-videos-api.jorgenkh.no/youtube/{video_id})](https://youtu.be/rLgWiDYSQlI)
+  [![](https://markdown-videos-api.jorgenkh.no/youtube/rLgWiDYSQlI)](https://youtu.be/rLgWiDYSQlI)
 
 ### Approach
 
