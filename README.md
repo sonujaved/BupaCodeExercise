@@ -4,6 +4,9 @@
   
   [![](https://markdown-videos-api.jorgenkh.no/youtube/rLgWiDYSQlI)](https://youtu.be/rLgWiDYSQlI)
 
+### API Key
+  #### Please create an account at https://www.exchangerate-api.com/ to obtain your key [Pro Licence free for 1st 30 days], or contact me
+
 ### Approach
 
 1. **Objective**: The objective of this application is to fetch exchange rates between two selected currencies for the past 30 days, preprocess the data, perform analysis, generate insights, and visualize the data using advanced analytics.
