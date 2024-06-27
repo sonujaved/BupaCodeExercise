@@ -1,5 +1,6 @@
 ## Documentation
-
+### Production App
+  #### Access the application from link : https://bupacodeexercise-wzm2dlq6nuaxeunj98sxze.streamlit.app/
 ### Approach
 
 1. **Objective**: The objective of this application is to fetch exchange rates between two selected currencies for the past 30 days, preprocess the data, perform analysis, generate insights, and visualize the data using advanced analytics.
