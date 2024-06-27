@@ -2,21 +2,23 @@
 
 ### Approach
 
-1. **Objective**: The objective of this application is to fetch exchange rates between two selected currencies for the past 30 days, preprocess the data, perform analysis, generate insights, and visualize the data using advanced charts.
+1. **Objective**: The objective of this application is to fetch exchange rates between two selected currencies for the past 30 days, preprocess the data, perform analysis, generate insights, and visualize the data using advanced analytics.
 
 2. **API Integration**: We integrated with an exchange rate API to fetch historical exchange rates. The application supports user input for API keys and currency selection.
+                        https://app.exchangerate-api.com/dashboard
+                        Example Request: https://v6.exchangerate-api.com/v6/xxxxxxxxxxxxxxxxxx/latest/USD
 
-3. **Data Preprocessing**: The fetched data is preprocessed to handle any missing values, outliers, and ensure correct data types.
+4. **Data Preprocessing**: The fetched data is preprocessed to handle missing values, and outliers, and ensure correct data types.
 
-4. **Data Analysis**: We performed various analyses such as calculating the best and worst exchange rates, average exchange rates, and detecting significant daily changes.
+5. **Data Analysis**: We performed various analyses such as calculating the best and worst exchange rates, and average exchange rates, and detecting significant daily changes.
 
-5. **Visualization**: We visualized the exchange rate trends, daily changes, moving averages, and provided advanced charting options like candlestick charts using Plotly.
+6. **Visualization**: We visualized the exchange rate trends, daily changes, and moving averages, and provided advanced charting options like candlestick charts using Plotly.
 
-6. **Insights Generation**: We generated insights based on the analyzed data to provide users with meaningful summaries of the exchange rate trends and anomalies.
+7. **Insights Generation**: We generated insights based on the analyzed data to provide users with meaningful summaries of the exchange rate trends and anomalies.
 
 ### Architecture
 
-- **Streamlit**: Streamlit is used for building the user interface of the application. It provides an interactive way for users to input their API keys and select currencies, and view the results.
+- **Streamlit**: Streamlit is used for building the application's user interface. It provides an interactive way for users to input their API keys, select currencies, and view the results.
 
 - **ExchangeRateAnalyzer Class**: The core functionality of fetching, preprocessing, analyzing, and visualizing the data is encapsulated in the `ExchangeRateAnalyzer` class. This class includes methods for each step of the process.
 
@@ -55,7 +57,7 @@ exchange_rate_app/
 
 ### Detailed Explanation of Code
 
-#### main.py
+#### Streamlit_ExchangeRate.py 
 
 ```python
 import streamlit as st
