@@ -5,6 +5,7 @@
 1. **Objective**: The objective of this application is to fetch exchange rates between two selected currencies for the past 30 days, preprocess the data, perform analysis, generate insights, and visualize the data using advanced analytics.
 
 2. **API Integration**: We integrated with an exchange rate API to fetch historical exchange rates. The application supports user input for API keys and currency selection.
+
                         https://app.exchangerate-api.com/dashboard
                         Example Request: https://v6.exchangerate-api.com/v6/xxxxxxxxxxxxxxxxxx/latest/USD
 
