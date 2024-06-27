@@ -14,8 +14,12 @@
 5. **Data Analysis**: We performed various analyses such as calculating the best and worst exchange rates, and average exchange rates, and detecting significant daily changes.
 
 6. **Visualization**: We visualized the exchange rate trends, daily changes, and moving averages, and provided advanced charting options like candlestick charts using Plotly.
+   ![alt text](https://github.com/sonujaved/BupaCodeExercise/blob/main/Screen%20Shot%202024-06-27%20at%203.50.12%20pm.png)
+   
+   ![alt text](https://github.com/sonujaved/BupaCodeExercise/blob/main/Screen%20Shot%202024-06-27%20at%203.50.23%20pm.png)
+   
 
-7. **Insights Generation**: We generated insights based on the analyzed data to provide users with meaningful summaries of the exchange rate trends and anomalies.
+8. **Insights Generation**: We generated insights based on the analyzed data to provide users with meaningful summaries of the exchange rate trends and anomalies.
 
 ### Architecture
 
