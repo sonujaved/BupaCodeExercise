@@ -248,26 +248,26 @@ class ExchangeRateAnalyzer:
     @time_function_execution
     # @log_function_call
     def generate_insights(self, df):
-    """
-    Generates insights based on the exchange rate data.
-
-    Parameters
-    ----------
-    df : pandas.DataFrame
-        The data frame containing the analyzed exchange rate data.
-
-    Returns
-    -------
-    list of str
-        A list of insights generated from the data analysis.
-
-    Insights
-    --------
-    - Trend Analysis: Determines if the exchange rate has increased or decreased over the period.
-    - Significant Changes: Identifies days with significant changes in the exchange rate.
-    - Highest and Lowest Rates: Provides dates with the highest and lowest exchange rates.
-    - Volatility Analysis: Assesses the volatility of the exchange rate based on the standard deviation of daily changes.
-    """
+        """
+        Generates insights based on the exchange rate data.
+    
+        Parameters
+        ----------
+        df : pandas.DataFrame
+            The data frame containing the analyzed exchange rate data.
+    
+        Returns
+        -------
+        list of str
+            A list of insights generated from the data analysis.
+    
+        Insights
+        --------
+        - Trend Analysis: Determines if the exchange rate has increased or decreased over the period.
+        - Significant Changes: Identifies days with significant changes in the exchange rate.
+        - Highest and Lowest Rates: Provides dates with the highest and lowest exchange rates.
+        - Volatility Analysis: Assesses the volatility of the exchange rate based on the standard deviation of daily changes.
+        """
         insights = []
 
         # Trend Analysis
