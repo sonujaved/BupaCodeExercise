@@ -47,7 +47,7 @@
 ```
 exchange_rate_app/
 │
-├── main.py  # Main Streamlit application file
+├── streamlit_ExchangeRate.py  # Main Streamlit application file
 │
 ├── utils/
 │   └── exchange_rate_analyzer.py  # ExchangeRateAnalyzer class definition
