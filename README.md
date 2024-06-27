@@ -320,3 +320,47 @@ def cache_results(func):
             return result
     return wrapper
 ```
+### Here are some testing scenarios to ensure the robustness and correctness of the above code:
+
+1. API Key Validation
+Scenario: Provide an invalid API key.
+Expected Outcome: The application should display an error message indicating an invalid API key or failed data fetch.
+2. Currency Input Validation
+Scenario: Enter unsupported or non-existent currency codes.
+Expected Outcome: The application should handle the error gracefully and inform the user about invalid currency codes.
+3. Data Fetching
+Scenario: Fetch exchange rates with a valid API key and supported currencies.
+Expected Outcome: The application should successfully fetch and display the data without errors.
+4. Handling No Data
+Scenario: Fetch exchange rates for a date range with no available data.
+Expected Outcome: The application should handle this scenario gracefully and inform the user that no data is available for the selected period.
+5. Data Preprocessing
+Scenario: Fetch data that contains missing values or outliers.
+Expected Outcome: The application should preprocess the data correctly, removing or handling missing values and outliers.
+6. Data Analysis
+Scenario: Perform analysis on valid exchange rate data.
+Expected Outcome: The application should calculate the best, worst, and average exchange rates correctly. It should also identify the highest and lowest daily changes accurately.
+7. Data Visualization
+Scenario: Generate plots and charts for exchange rates.
+Expected Outcome: The application should generate clear and correct visualizations, including line charts, candlestick charts, and moving averages.
+8. Caching Mechanism
+Scenario: Fetch exchange rates for the same input parameters multiple times.
+Expected Outcome: The application should use cached results to avoid redundant API calls and improve performance.
+9. Logging and Timing
+Scenario: Execute various functions of the ExchangeRateAnalyzer class.
+Expected Outcome: The application should log function calls and execution times, providing clear feedback in the Streamlit interface.
+10. Data Download
+Scenario: Download the processed exchange rate data as a JSON file.
+Expected Outcome: The application should allow users to download the JSON file with the correct data format.
+11. User Interface
+Scenario: Test the user interface elements like input fields, buttons, and dropdowns.
+Expected Outcome: The application should correctly handle user inputs and provide a smooth user experience.
+12. Error Handling
+Scenario: Simulate various errors such as network issues, API errors, and invalid responses.
+Expected Outcome: The application should handle errors gracefully and provide informative error messages to the user.
+13. Insight Generation
+Scenario: Generate insights based on the analyzed data.
+Expected Outcome: The application should provide meaningful and accurate insights about the exchange rate trends and anomalies.
+14. Edge Cases
+Scenario: Test with edge cases like fetching data for the current day only, or for a period longer than 30 days.
+Expected Outcome: The application should handle edge cases correctly, ensuring no unexpected behavior or crashes.
