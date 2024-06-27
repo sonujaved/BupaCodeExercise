@@ -2,7 +2,7 @@
 ### Production App
   #### Access the application from link : https://bupacodeexercise-wzm2dlq6nuaxeunj98sxze.streamlit.app/
   
-  [![IMAGE ALT TEXT HERE](https://github.com/sonujaved/BupaCodeExercise/blob/main/images/Screen%20Shot%202024-06-27%20at%209.08.03%20pm.png)](https://youtu.be/rLgWiDYSQlI)
+  [![](https://markdown-videos-api.jorgenkh.no/youtube/{video_id})](https://youtu.be/rLgWiDYSQlI)
 
 ### Approach
 
