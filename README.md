@@ -72,63 +72,64 @@ api_key = st.sidebar.text_input("Enter your API key:", type="password")
 base_currency = st.sidebar.text_input("Enter the base currency (e.g., AUD):")
 target_currency = st.sidebar.text_input("Enter the target currency (e.g., NZD):")
 
-if api_key and base_currency and target_currency:
-    analyzer = ExchangeRateAnalyzer(api_key, base_currency, target_currency)
-    df = analyzer.analyze_data()
+if __name__ == "__main__":
+    if api_key and base_currency and target_currency:
+        analyzer = ExchangeRateAnalyzer(api_key, base_currency, target_currency)
+        df = analyzer.analyze_data()
 
-    if not df.empty:
-        st.success("Data fetched and preprocessed successfully!")
+        if not df.empty:
+            st.success("Data fetched and preprocessed successfully!")
 
-        # Display raw data
-        st.subheader("Raw Data")
-        st.dataframe(df)
+            # Display raw data
+            st.subheader("Raw Data")
+            st.dataframe(df)
 
-        # Perform data analysis
-        best_rate, worst_rate, average_rate, highest_daily_change, lowest_daily_change = analyzer.get_statistics(df)
+            # Perform data analysis
+            best_rate, worst_rate, average_rate, highest_daily_change, lowest_daily_change = analyzer.get_statistics(df)
 
-        st.subheader("Data Analysis")
-        st.write(f"**Best Exchange Rate:** {best_rate}")
-        st.write(f"**Worst Exchange Rate:** {worst_rate}")
-        st.write(f"**Average Exchange Rate:** {average_rate:.4f}")
-        st.write(f"**Highest Daily Change:** {highest_daily_change:.4f}")
-        st.write(f"**Lowest Daily Change:** {lowest_daily_change:.4f}")
+            st.subheader("Data Analysis")
+            st.write(f"**Best Exchange Rate:** {best_rate}")
+            st.write(f"**Worst Exchange Rate:** {worst_rate}")
+            st.write(f"**Average Exchange Rate:** {average_rate:.4f}")
+            st.write(f"**Highest Daily Change:** {highest_daily_change:.4f}")
+            st.write(f"**Lowest Daily Change:** {lowest_daily_change:.4f}")
 
-        # Generate and display insights
-        st.subheader("Insights")
-        insights = analyzer.generate_insights(df)
-        for insight in insights:
-            st.write(f"- {insight}")
+            # Generate and display insights
+            st.subheader("Insights")
+            insights = analyzer.generate_insights(df)
+            for insight in insights:
+                st.write(f"- {insight}")
 
-        # Plot exchange rates
-        st.subheader("Exchange Rate Trend")
-        fig = analyzer.plot_exchange_rate_trend(df)
-        st.plotly_chart(fig)
+            # Plot exchange rates
+            st.subheader("Exchange Rate Trend")
+            fig = analyzer.plot_exchange_rate_trend(df)
+            st.plotly_chart(fig)
 
-        # Plot daily changes and moving average
-        st.subheader("Daily Change and Moving Average")
-        fig = analyzer.plot_advanced_analysis(df)
-        st.plotly_chart(fig)
+            # Plot daily changes and moving average
+            st.subheader("Daily Change and Moving Average")
+            fig = analyzer.plot_advanced_analysis(df)
+            st.plotly_chart(fig)
 
-        # Plot $100 conversion over time
-        st.subheader("$100 Conversion Over Time (30 Days)")
-        fig = analyzer.plot_conversion_over_time(df)
-        st.plotly_chart(fig)
+            # Plot $100 conversion over time
+            st.subheader("$100 Conversion Over Time (30 Days)")
+            fig = analyzer.plot_conversion_over_time(df)
+            st.plotly_chart(fig)
 
-        # Advanced Chart: Candlestick Chart
-        st.subheader("Chart: Candlestick Chart")
-        fig = analyzer.plot_candlestick_chart(df)
-        st.plotly_chart(fig)
+            # Advanced Chart: Candlestick Chart
+            st.subheader("Chart: Candlestick Chart")
+            fig = analyzer.plot_candlestick_chart(df)
+            st.plotly_chart(fig)
 
-        # Save to JSON
-        json_output = df.to_json(orient='records', date_format='iso')
-        st.download_button(
-            label="Download data as JSON",
-            data=json_output,
-            file_name='exchange_rates.json',
-            mime='application/json'
-        )
-    else:
-        st.error("Failed to fetch data. Please check your API key and try again.")
+            # Save to JSON
+            json_output = df.to_json(orient='records', date_format='iso')
+            st.download_button(
+                label="Download data as JSON",
+                data=json_output,
+                file_name='exchange_rates.json',
+                mime='application/json'
+            )
+        else:
+            st.error("Failed to fetch data. Please check your API key and try again.")
 ```
 
 #### utils/exchange_rate_analyzer.py
@@ -136,49 +137,11 @@ if api_key and base_currency and target_currency:
 ```python
 import requests
 import pandas as pd
-from datetime import datetime, timedelta
 import plotly.express as px
 import plotly.graph_objects as go
-import functools
-import hashlib
-import time
+from datetime import datetime, timedelta
+from .decorators import log_function_call, time_function_execution, cache_results
 import streamlit as st
-
-# Decorator for logging function calls
-def log_function_call(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        st.write(f"Calling {func.__name__} function...")
-        return func(*args, **kwargs)
-    return wrapper
-
-# Decorator for timing function execution
-def time_function_execution(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        start_time = time.time()
-        result = func(*args, **kwargs)
-        end_time = time.time()
-        execution_time = end_time - start_time
-        st.write(f"Function {func.__name__} executed in {execution_time:.4f} seconds")
-        return result
-    return wrapper
-
-# Decorator for caching function results
-def cache_results(func):
-    cache = {}
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        # Create a cache key based on function name and hashed arguments
-        key = func.__name__ + hashlib.md5(str(args).encode('utf-8')).hexdigest()
-        if key in cache:
-            st.write(f"Returning cached result for {func.__name__} function...")
-            return cache[key]
-        else:
-            result = func(*args, **kwargs)
-            cache[key] = result
-            return result
-    return wrapper
 
 class ExchangeRateAnalyzer:
     def __init__(self, api_key, base_currency, target_currency, days=30):
@@ -189,7 +152,7 @@ class ExchangeRateAnalyzer:
 
     @cache_results
     @time_function_execution
-    @log_function_call
+   # @log_function_call
     def fetch_exchange_rates(self):
         rates = {}
         end_date = datetime.now()
@@ -212,7 +175,7 @@ class ExchangeRateAnalyzer:
 
     @cache_results
     @time_function_execution
-    @log_function_call
+    # @log_function_call
     def preprocess_data(self, df):
         df["Date"] = pd.to_datetime(df["Date"])
         df.dropna(inplace=True)
@@ -220,7 +183,7 @@ class ExchangeRateAnalyzer:
 
     @cache_results
     @time_function_execution
-    @log_function_call
+    # @log_function_call
     def analyze_data(self):
         rates = self.fetch_exchange_rates()
         df = pd.DataFrame(list(rates.items()), columns=["Date", "Exchange Rate"])
@@ -232,7 +195,7 @@ class ExchangeRateAnalyzer:
 
     @cache_results
     @time_function_execution
-    @log_function_call
+    # @log_function_call
     def get_statistics(self, df):
         best_rate = df["Exchange Rate"].max()
         worst_rate = df["Exchange Rate"].min()
@@ -241,6 +204,70 @@ class ExchangeRateAnalyzer:
         lowest_daily_change = df["Daily Change"].min()
         return best_rate, worst_rate, average_rate, highest_daily_change, lowest_daily_change
 
+    def plot_exchange_rate_trend(self, df):
+        fig = px.line(df, x="Date", y="Exchange Rate",
+                      title=f"{self.base_currency} to {self.target_currency} Exchange Rate Over the Past 30 Days")
+        return fig
+
+    def plot_advanced_analysis(self, df):
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=df["Date"], y=df["Daily Change"], mode='lines+markers', name='Daily Change',
+                                 line=dict(color='red')))
+        fig.add_trace(
+            go.Scatter(x=df["Date"], y=df["7-Day Moving Average"], mode='lines+markers', name='7-Day Moving Average',
+                       line=dict(color='green')))
+        fig.update_layout(
+            title=f"Daily Change and 7-Day Moving Average of {self.base_currency} to {self.target_currency} Exchange Rate",
+            xaxis_title="Date", yaxis_title="Value")
+        return fig
+
+    def plot_conversion_over_time(self, df, initial_amount=100):
+        df["Conversion Amount"] = initial_amount / df["Exchange Rate"]
+        fig = px.line(df, x="Date", y="Conversion Amount", title=f"${initial_amount} {self.target_currency} to {self.base_currency} Conversion Over Time (30 Days)")
+        return fig
+
+    def plot_candlestick_chart(self, df):
+        fig = go.Figure(data=[go.Candlestick(x=df['Date'],
+                                             open=df['Exchange Rate'].shift(1).fillna(df['Exchange Rate']),
+                                             high=df['Exchange Rate'],
+                                             low=df['Exchange Rate'],
+                                             close=df['Exchange Rate'])])
+        fig.update_layout(
+            title=f"{self.base_currency} to {self.target_currency} Candlestick Chart Over the Past 30 Days",
+            xaxis_title="Date", yaxis_title="Exchange Rate")
+        return fig
+
     @cache_results
     @time_function_execution
-    @log_function_call
+    # @log_function_call
+    def generate_insights(self, df):
+        insights = []
+
+        # Trend Analysis
+        if df["Exchange Rate"].iloc[-1] > df["Exchange Rate"].iloc[0]:
+            insights.append("The exchange rate has increased over the past 30 days.")
+        else:
+            insights.append("The exchange rate has decreased over the past 30 days.")
+
+        # Significant Changes
+        significant_changes = df[
+            df["Daily Change"].abs() > df["Daily Change"].abs().mean() + 2 * df["Daily Change"].abs().std()]
+        if not significant_changes.empty:
+            insights.append(
+                f"There were {len(significant_changes)} days with significant changes in the exchange rate.")
+
+        # Highest and Lowest Rates
+        best_rate_date = df[df["Exchange Rate"] == df["Exchange Rate"].max()]["Date"].values[0]
+        worst_rate_date = df[df["Exchange Rate"] == df["Exchange Rate"].min()]["Date"].values[0]
+        insights.append(f"The highest exchange rate was on {best_rate_date}.")
+        insights.append(f"The lowest exchange rate was on {worst_rate_date}.")
+
+        # Volatility Analysis
+        if df["Daily Change"].std() > 0.01:
+            insights.append("The exchange rate has been quite volatile.")
+        else:
+            insights.append("The exchange rate has been relatively stable.")
+
+        return insights
+```
+
